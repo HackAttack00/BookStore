@@ -27,18 +27,23 @@ extension BookViewModel {
     var title: String {
         self.bookModel.title
     }
+    
     var subtitle: String {
         self.bookModel.subtitle
     }
+    
     var isbn13: String {
         self.bookModel.isbn13
     }
+    
     var price: String {
         self.bookModel.price
     }
+    
     var image: String {
         self.bookModel.image
     }
+    
     var url: String {
         self.bookModel.url
     }

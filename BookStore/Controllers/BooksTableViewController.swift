@@ -9,11 +9,11 @@ import Foundation
 import UIKit
 
 class BooksTableViewController: UITableViewController {
-//    var booksListViewModel = BooksListViewModel()
-    
     var booksListViewModel = BooksListViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 600
         requestBooksList()
     }
     
@@ -49,16 +49,10 @@ class BooksTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let vm = self.booksListViewModel.book(at: indexPath.row)
         let vm = self.booksListViewModel.books[indexPath.row]
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "booksTableViewCell", for: indexPath) as! BookCell
         cell.titleLabel?.text = vm.title
         cell.subTitleLabel?.text = vm.subtitle
         return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100.0
     }
 }
