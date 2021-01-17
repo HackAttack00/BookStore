@@ -13,7 +13,7 @@ class BooksTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 600
+        tableView.estimatedRowHeight = 500
         requestBooksList()
     }
     
@@ -36,8 +36,6 @@ class BooksTableViewController: UITableViewController {
                 print(error)
             }
         }
-
-//        Webservice().load()
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -54,5 +52,14 @@ class BooksTableViewController: UITableViewController {
         cell.titleLabel?.text = vm.title
         cell.subTitleLabel?.text = vm.subtitle
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vm = self.booksListViewModel.books[indexPath.row]
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let bookDetailViewController = BookDetailViewController(collectionViewLayout: layout)
+        bookDetailViewController.isbn13 = vm.isbn13
+        self.navigationController?.pushViewController(bookDetailViewController, animated: true)
     }
 }
