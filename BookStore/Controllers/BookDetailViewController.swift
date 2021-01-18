@@ -17,7 +17,7 @@ class BookDetailViewController: UICollectionViewController, UICollectionViewDele
     
     var bookDetailInfoListViewModel = BookDetailInfoListViewModel()
     var searchString: String?
-    var currentIndex: String?
+    var currentIndex: Int?
     
     var setFocusedBookIndex: SetFocusedBookIndex? // 선택한 버튼의 타이틀 값 closer
     
@@ -32,8 +32,15 @@ class BookDetailViewController: UICollectionViewController, UICollectionViewDele
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if let currentIndex = self.currentIndex {
-            let indexPath = IndexPath(row: Int(currentIndex) ?? 0, section: 0)
+            let indexPath = IndexPath(row: currentIndex, section: 0)
             self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if let currentIndex = self.currentIndex {
+            self.setFocusedBookIndex?(currentIndex)
         }
     }
     
@@ -83,6 +90,6 @@ class BookDetailViewController: UICollectionViewController, UICollectionViewDele
     }
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        self.setFocusedBookIndex!(indexPath.row)
+        self.currentIndex = indexPath.row
     }
 }

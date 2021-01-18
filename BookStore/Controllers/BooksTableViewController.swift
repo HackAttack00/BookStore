@@ -68,7 +68,7 @@ class BooksTableViewController: UITableViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let bookDetailViewController = BookDetailViewController(collectionViewLayout: layout)
-        bookDetailViewController.currentIndex = String(indexPath.row)
+        bookDetailViewController.currentIndex = indexPath.row
         weak var tableView = tableView
         bookDetailViewController.setFocusedBookIndex = { index in
             DispatchQueue.main.async {
