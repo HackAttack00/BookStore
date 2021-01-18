@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A03C9B825B5AA260003BC65 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A03C9B725B5AA260003BC65 /* DataSource.swift */; };
 		0A40D27025B03472003B6E78 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A40D26F25B03472003B6E78 /* Book.swift */; };
 		0A40D27825B03ED7003B6E78 /* Webservice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A40D27725B03ED7003B6E78 /* Webservice.swift */; };
 		0A40D27D25B04732003B6E78 /* BooksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A40D27C25B04732003B6E78 /* BooksTableViewController.swift */; };
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A03C9B725B5AA260003BC65 /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		0A40D26F25B03472003B6E78 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		0A40D27725B03ED7003B6E78 /* Webservice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Webservice.swift; sourceTree = "<group>"; };
 		0A40D27C25B04732003B6E78 /* BooksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksTableViewController.swift; sourceTree = "<group>"; };
@@ -88,6 +90,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A03C9B625B5A9F80003BC65 /* DataStore */ = {
+			isa = PBXGroup;
+			children = (
+				0A03C9B725B5AA260003BC65 /* DataSource.swift */,
+			);
+			path = DataStore;
+			sourceTree = "<group>";
+		};
 		0A40D26B25B033FA003B6E78 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -153,6 +163,7 @@
 		0AF9EF2825B019C200AFBCA0 /* BookStore */ = {
 			isa = PBXGroup;
 			children = (
+				0A03C9B625B5A9F80003BC65 /* DataStore */,
 				0A40D28F25B04DB1003B6E78 /* Cell */,
 				0A40D26E25B03440003B6E78 /* Controllers */,
 				0A40D26D25B03434003B6E78 /* Services */,
@@ -324,6 +335,7 @@
 				0A40D28525B047AB003B6E78 /* BooksListViewModel.swift in Sources */,
 				0A5AE5A325B44B0B00C2586F /* BookDetailCell.swift in Sources */,
 				0A5AE59E25B3D76E00C2586F /* BookDetailViewController.swift in Sources */,
+				0A03C9B825B5AA260003BC65 /* DataSource.swift in Sources */,
 				0AF9EF2C25B019C200AFBCA0 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

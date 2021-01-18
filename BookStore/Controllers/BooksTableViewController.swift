@@ -9,7 +9,9 @@ import Foundation
 import UIKit
 
 class BooksTableViewController: UITableViewController {
-    var booksListViewModel = BooksListViewModel()
+    
+    var booksListData = sharedDataSource.sharedInstance
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = UITableView.automaticDimension
@@ -17,19 +19,25 @@ class BooksTableViewController: UITableViewController {
         requestBooksList()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
     private func requestBooksList() {
         guard let booksListURL = URL(string: "https://api.itbook.store/1.0/new") else {
             fatalError("URL is incorrect!")
         }
 
-        Webservice().load(resource:Resource<BookListModel>(url:booksListURL)) { result in
+        Webservice().load(resource:Resource<BookListModel>(url:booksListURL)) { [self] result in
             switch result {
             case .success(let booksList):
                 print(booksList)
                 if let books = booksList.books {
-                    self.booksListViewModel.error = booksList.error
-                    self.booksListViewModel.total = booksList.total
-                    self.booksListViewModel.books = books.map(BookViewModel.init)
+                    let booksListViewModel = BooksListViewModel()
+                    booksListViewModel.error = booksList.error
+                    booksListViewModel.total = booksList.total
+                    booksListViewModel.books = books.map(BookViewModel.init)
+                    self.booksListData.append(booksList: booksListViewModel)
                 }
                 self.tableView.reloadData()
             case .failure(let error):
@@ -43,11 +51,12 @@ class BooksTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.booksListViewModel.books.count
+//        return self.booksListViewModel.books.count
+        return booksListData.booksListViewModel.books.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let vm = self.booksListViewModel.books[indexPath.row]
+        let vm = booksListData.booksListViewModel.books[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "booksTableViewCell", for: indexPath) as! BookCell
         cell.titleLabel?.text = vm.title
         cell.subTitleLabel?.text = vm.subtitle
@@ -55,11 +64,18 @@ class BooksTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vm = self.booksListViewModel.books[indexPath.row]
+        tableView.deselectRow(at: indexPath, animated: true)
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let bookDetailViewController = BookDetailViewController(collectionViewLayout: layout)
-        bookDetailViewController.isbn13 = vm.isbn13
+        bookDetailViewController.currentIndex = String(indexPath.row)
+        weak var tableView = tableView
+        bookDetailViewController.setFocusedBookIndex = { index in
+            DispatchQueue.main.async {
+                let indexPath = IndexPath(row: index, section: 0)
+                tableView?.scrollToRow(at: indexPath, at: .middle, animated: false)
+            }
+        }
         self.navigationController?.pushViewController(bookDetailViewController, animated: true)
     }
 }

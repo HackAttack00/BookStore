@@ -15,6 +15,7 @@ class BookDetailCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        bookImageView.backgroundColor = UIColor.brown
         
         bookTitle.textAlignment = .left
         bookTitle.numberOfLines = 0
@@ -47,7 +48,7 @@ class BookDetailCell: UICollectionViewCell {
             bookImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             bookImageView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10),
             bookImageView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10),
-            bookImageView.heightAnchor.constraint(equalToConstant: 200)
+            bookImageView.heightAnchor.constraint(equalToConstant: 300)
             ])
         
         NSLayoutConstraint.activate([
