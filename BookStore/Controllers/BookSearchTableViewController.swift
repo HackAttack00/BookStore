@@ -1,14 +1,14 @@
 //
-//  BooksTableViewController.swift
+//  BookSearchTableViewController.swift
 //  BookStore
 //
-//  Created by seungchul lee on 2021/01/14.
+//  Created by seungchul lee on 2021/01/25.
 //
 
 import Foundation
 import UIKit
 
-class BooksTableViewController: UITableViewController {
+class BookSearchTableViewController: UITableViewController {
     var booksListData = sharedDataSource.sharedInstance
     
     override func viewDidLoad() {
@@ -36,7 +36,8 @@ class BooksTableViewController: UITableViewController {
                     booksListViewModel.error = booksList.error
                     booksListViewModel.total = booksList.total
                     booksListViewModel.books = books.map(BookViewModel.init)
-                    self.booksListData.append(booksList: booksListViewModel)
+//                    self.booksListData.append(booksList: booksListViewModel)
+                    self.booksListData.append(searchedBooksList: booksListViewModel)
                 }
                 self.tableView.reloadData()
             case .failure(let error):
@@ -51,11 +52,11 @@ class BooksTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 //        return self.booksListViewModel.books.count
-        return booksListData.booksListViewModel.books.count
+        return booksListData.booksSearchListViewModel.books.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let vm = booksListData.booksListViewModel.books[indexPath.row]
+        let vm = booksListData.booksSearchListViewModel.books[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "booksTableViewCell", for: indexPath) as! BookCell
         cell.titleLabel?.text = vm.title
         cell.subTitleLabel?.text = vm.subtitle
@@ -76,5 +77,9 @@ class BooksTableViewController: UITableViewController {
             }
         }
         self.navigationController?.pushViewController(bookDetailViewController, animated: true)
+    }
+    
+    @IBAction func pressedCloseBtn(btn: UIButton) {
+        self.dismiss(animated: true, completion: nil)
     }
 }

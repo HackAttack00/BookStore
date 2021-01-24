@@ -10,15 +10,22 @@ import Foundation
 class sharedDataSource : NSObject {
     static var sharedInstance = sharedDataSource();
     var booksListViewModel = BooksListViewModel()
+    var booksSearchListViewModel = BooksListViewModel()
     
     override init(){
         super.init()
     }
     
-    func removeAll() {
+    func removeNewListAll() {
         self.booksListViewModel.error = ""
         self.booksListViewModel.total = ""
         self.booksListViewModel.books.removeAll()
+    }
+    
+    func removeSearchList() {
+        self.booksSearchListViewModel.error = ""
+        self.booksSearchListViewModel.total = ""
+        self.booksSearchListViewModel.books.removeAll()
     }
     
     func append(book: BookViewModel) {
@@ -27,5 +34,13 @@ class sharedDataSource : NSObject {
     
     func append(booksList: BooksListViewModel) {
         self.booksListViewModel.books = booksList.books
+    }
+    
+    func append(searchedBook: BookViewModel) {
+        self.booksSearchListViewModel.books.append(searchedBook)
+    }
+    
+    func append(searchedBooksList: BooksListViewModel) {
+        self.booksSearchListViewModel.books = searchedBooksList.books
     }
 }

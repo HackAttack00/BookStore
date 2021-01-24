@@ -13,7 +13,7 @@ protocol BookFocusingProtocol {
 }
 
 class BookDetailViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, BookFocusingProtocol{
-    var booksListData = sharedDataSource.sharedInstance
+    var booksListViewModel = sharedDataSource.sharedInstance.booksListViewModel
     
     var bookDetailInfoListViewModel = BookDetailInfoListViewModel()
     var searchString: String?
@@ -45,7 +45,6 @@ class BookDetailViewController: UICollectionViewController, UICollectionViewDele
     }
     
     private func requestBooksList(isbn13:String, completion: @escaping (BookDetailInfoModel)->()) {
-        let isbn13 = isbn13
         guard let bookDetailInfoURL = URL(string: "https://api.itbook.store/1.0/books/\(isbn13)") else {
             fatalError("URL is incorrect!")
         }
@@ -70,13 +69,13 @@ class BookDetailViewController: UICollectionViewController, UICollectionViewDele
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return booksListData.booksListViewModel.books.count
+        return booksListViewModel.books.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BookDetailCell", for: indexPath) as! BookDetailCell
         cell.backgroundColor = .blue
-        let vm = booksListData.booksListViewModel.books[indexPath.row]
+        let vm = booksListViewModel.books[indexPath.row]
         requestBooksList(isbn13: vm.isbn13) { (bookDetailInfoModel) in
             cell.bookTitle.text = bookDetailInfoModel.title
             cell.bookDesc.text = bookDetailInfoModel.desc
