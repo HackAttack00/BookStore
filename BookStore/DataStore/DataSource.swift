@@ -22,7 +22,7 @@ class sharedDataSource : NSObject {
         self.booksListViewModel.books.removeAll()
     }
     
-    func removeSearchList() {
+    func removeSearchListAll() {
         self.booksSearchListViewModel.error = ""
         self.booksSearchListViewModel.total = ""
         self.booksSearchListViewModel.books.removeAll()
@@ -33,7 +33,7 @@ class sharedDataSource : NSObject {
     }
     
     func append(booksList: BooksListViewModel) {
-        self.booksListViewModel.books = booksList.books
+        self.booksListViewModel.books.append(contentsOf: booksList.books)
     }
     
     func append(searchedBook: BookViewModel) {
@@ -41,6 +41,6 @@ class sharedDataSource : NSObject {
     }
     
     func append(searchedBooksList: BooksListViewModel) {
-        self.booksSearchListViewModel.books = searchedBooksList.books
+        self.booksSearchListViewModel.books.append(contentsOf: searchedBooksList.books)
     }
 }

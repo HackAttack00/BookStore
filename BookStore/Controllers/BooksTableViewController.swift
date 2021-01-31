@@ -67,6 +67,7 @@ class BooksTableViewController: UITableViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let bookDetailViewController = BookDetailViewController(collectionViewLayout: layout)
+        bookDetailViewController.booksListViewModel = sharedDataSource.sharedInstance.booksListViewModel
         bookDetailViewController.currentIndex = indexPath.row
         weak var tableView = tableView
         bookDetailViewController.setFocusedBookIndex = { index in

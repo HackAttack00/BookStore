@@ -13,8 +13,8 @@ protocol BookFocusingProtocol {
 }
 
 class BookDetailViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, BookFocusingProtocol{
-    var booksListViewModel = sharedDataSource.sharedInstance.booksListViewModel
-    
+
+    public var booksListViewModel: BooksListViewModel?
     var bookDetailInfoListViewModel = BookDetailInfoListViewModel()
     var searchString: String?
     var currentIndex: Int?
@@ -69,14 +69,22 @@ class BookDetailViewController: UICollectionViewController, UICollectionViewDele
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        guard let booksListViewModel = booksListViewModel else {
+            return 0
+        }
         return booksListViewModel.books.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BookDetailCell", for: indexPath) as! BookDetailCell
         cell.backgroundColor = .blue
+        guard let booksListViewModel = booksListViewModel else {
+            return cell
+        }
+        
         let vm = booksListViewModel.books[indexPath.row]
         requestBooksList(isbn13: vm.isbn13) { (bookDetailInfoModel) in
+            cell.bookImageView.load(url: URL(string: bookDetailInfoModel.image)!, placeholder: nil, cache: nil)
             cell.bookTitle.text = bookDetailInfoModel.title
             cell.bookDesc.text = bookDetailInfoModel.desc
         }
