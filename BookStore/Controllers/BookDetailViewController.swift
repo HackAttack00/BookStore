@@ -15,7 +15,7 @@ protocol BookFocusingProtocol {
 class BookDetailViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, BookFocusingProtocol{
 
     public var booksListViewModel: BooksListViewModel?
-    var bookDetailInfoListViewModel = BookDetailInfoListViewModel()
+//    var bookDetailInfoListViewModel = BookDetailInfoListViewModel()
     var searchString: String?
     var currentIndex: Int?
     
@@ -23,7 +23,7 @@ class BookDetailViewController: UICollectionViewController, UICollectionViewDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.collectionView?.automaticallyAdjustsScrollIndicatorInsets = false
         self.collectionView?.backgroundColor = .green
         self.collectionView?.isPagingEnabled = true
         self.collectionView?.register(BookDetailCell.self, forCellWithReuseIdentifier: "BookDetailCell")
@@ -53,8 +53,8 @@ class BookDetailViewController: UICollectionViewController, UICollectionViewDele
             switch result {
             case .success(let bookDetailInfo):
                 print(bookDetailInfo)
-                let bookInfo = BookDetailInfoViewModel(bookDetailInfoModel: bookDetailInfo)
-                self.bookDetailInfoListViewModel.books.append(bookInfo)
+//                let bookInfo = BookDetailInfoViewModel(bookDetailInfoModel: bookDetailInfo)
+//                self.bookDetailInfoListViewModel.books.append(bookInfo)
                 DispatchQueue.main.async {
                     completion(bookDetailInfo)
                 }
@@ -78,17 +78,6 @@ class BookDetailViewController: UICollectionViewController, UICollectionViewDele
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BookDetailCell", for: indexPath) as! BookDetailCell
         cell.backgroundColor = .blue
-        guard let booksListViewModel = booksListViewModel else {
-            return cell
-        }
-        
-        let vm = booksListViewModel.books[indexPath.row]
-        requestBooksList(isbn13: vm.isbn13) { (bookDetailInfoModel) in
-            cell.bookImageView.load(url: URL(string: bookDetailInfoModel.image)!, placeholder: nil, cache: nil)
-            cell.bookTitle.text = bookDetailInfoModel.title
-            cell.bookDesc.text = bookDetailInfoModel.desc
-        }
-        
         return cell
     }
     
@@ -97,6 +86,22 @@ class BookDetailViewController: UICollectionViewController, UICollectionViewDele
     }
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        let cell = cell as! BookDetailCell
+        guard let booksListViewModel = booksListViewModel else {
+            return
+        }
+        
+        let vm = booksListViewModel.books[indexPath.row]
+        requestBooksList(isbn13: vm.isbn13) { (bookDetailInfoModel) in
+            cell.bookImageView.load(url: URL(string: bookDetailInfoModel.image)!, placeholder: nil, cache: nil)
+            cell.bookTitle.text = bookDetailInfoModel.title
+            cell.bookDesc.text = bookDetailInfoModel.desc
+        }
         self.currentIndex = indexPath.row
+        
+        
+        if self.currentIndex == (booksListViewModel.books.count - 1) {
+            //append next list
+        }
     }
 }

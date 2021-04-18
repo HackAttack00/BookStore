@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 class BookCell: UITableViewCell {
+    @IBOutlet var bookImageView: UIImageView!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var subTitleLabel: UILabel!
 }

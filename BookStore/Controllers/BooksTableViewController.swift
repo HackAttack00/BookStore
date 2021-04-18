@@ -57,6 +57,9 @@ class BooksTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let vm = booksListData.booksListViewModel.books[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "booksTableViewCell", for: indexPath) as! BookCell
+//        cell.bookImageView.load(url: URL(string: bookDetailInfoModel.image)!, placeholder: nil, cache: nil)
+        cell.bookImageView.image = nil
+        cell.bookImageView.load(url: URL(string: vm.image)!, placeholder: nil, cache: nil)
         cell.titleLabel?.text = vm.title
         cell.subTitleLabel?.text = vm.subtitle
         return cell
@@ -76,6 +79,7 @@ class BooksTableViewController: UITableViewController {
                 tableView?.scrollToRow(at: indexPath, at: .middle, animated: false)
             }
         }
+        bookDetailViewController.edgesForExtendedLayout = []
         self.navigationController?.pushViewController(bookDetailViewController, animated: true)
     }
 }

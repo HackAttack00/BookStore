@@ -61,6 +61,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="bookImageView" destination="Uxp-EI-62i" id="jZV-cX-O6R"/>
                                     <outlet property="subTitleLabel" destination="6lB-Gm-x80" id="GMO-QE-CA8"/>
                                     <outlet property="titleLabel" destination="3ED-Dp-uc5" id="TkP-pF-bSM"/>
                                 </connections>
@@ -81,7 +82,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G9g-4P-zNU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1042" y="-682"/>
+            <point key="canvasLocation" x="-980" y="-682"/>
         </scene>
         <!--Book Search Table View Controller-->
         <scene sceneID="K64-Gi-OwY">
@@ -145,6 +146,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="bookImageView" destination="DID-3I-did" id="pcZ-Nl-OYd"/>
                                     <outlet property="subTitleLabel" destination="C7H-i4-zbC" id="w1u-4a-EnM"/>
                                     <outlet property="titleLabel" destination="VZf-6B-3ra" id="b8v-ba-b3o"/>
                                 </connections>
@@ -205,7 +207,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hvv-zP-7Wo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-278.26086956521743" y="-682.36607142857144"/>
+            <point key="canvasLocation" x="-170" y="-682"/>
         </scene>
     </scenes>
     <resources>

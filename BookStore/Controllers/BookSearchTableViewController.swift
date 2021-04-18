@@ -64,9 +64,18 @@ class BookSearchTableViewController: UITableViewController, UISearchBarDelegate 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let vm = booksListData.booksSearchListViewModel.books[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "booksTableViewCell", for: indexPath) as! BookCell
+//        cell.bookImageView.image = nil
+//        cell.bookImageView.load(url: URL(string: vm.image)!, placeholder: nil, cache: nil)
         cell.titleLabel?.text = vm.title
         cell.subTitleLabel?.text = vm.subtitle
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let cell = cell as! BookCell
+        let vm = booksListData.booksSearchListViewModel.books[indexPath.row]
+        cell.bookImageView.image = nil
+        cell.bookImageView.load(url: URL(string: vm.image)!, placeholder: nil, cache: nil)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

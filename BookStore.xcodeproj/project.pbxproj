@@ -13,6 +13,7 @@
 		0A40D27D25B04732003B6E78 /* BooksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A40D27C25B04732003B6E78 /* BooksTableViewController.swift */; };
 		0A40D28525B047AB003B6E78 /* BooksListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A40D28425B047AB003B6E78 /* BooksListViewModel.swift */; };
 		0A40D29125B04DC1003B6E78 /* BookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A40D29025B04DC1003B6E78 /* BookCell.swift */; };
+		0A57359E262AB0D80075BACF /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A57359D262AB0D80075BACF /* ImageCache.swift */; };
 		0A5AE59E25B3D76E00C2586F /* BookDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5AE59D25B3D76E00C2586F /* BookDetailViewController.swift */; };
 		0A5AE5A325B44B0B00C2586F /* BookDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5AE5A225B44B0B00C2586F /* BookDetailCell.swift */; };
 		0A77B60925C63439003850F8 /* UIImageView+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A77B60825C63439003850F8 /* UIImageView+Cache.swift */; };
@@ -50,6 +51,7 @@
 		0A40D27C25B04732003B6E78 /* BooksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksTableViewController.swift; sourceTree = "<group>"; };
 		0A40D28425B047AB003B6E78 /* BooksListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksListViewModel.swift; sourceTree = "<group>"; };
 		0A40D29025B04DC1003B6E78 /* BookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCell.swift; sourceTree = "<group>"; };
+		0A57359D262AB0D80075BACF /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		0A5AE59D25B3D76E00C2586F /* BookDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewController.swift; sourceTree = "<group>"; };
 		0A5AE5A225B44B0B00C2586F /* BookDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailCell.swift; sourceTree = "<group>"; };
 		0A77B60825C63439003850F8 /* UIImageView+Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Cache.swift"; sourceTree = "<group>"; };
@@ -146,6 +148,14 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		0A57359C262AB08C0075BACF /* ImageCache */ = {
+			isa = PBXGroup;
+			children = (
+				0A57359D262AB0D80075BACF /* ImageCache.swift */,
+			);
+			path = ImageCache;
+			sourceTree = "<group>";
+		};
 		0AF9EF1D25B019C100AFBCA0 = {
 			isa = PBXGroup;
 			children = (
@@ -169,6 +179,7 @@
 		0AF9EF2825B019C200AFBCA0 /* BookStore */ = {
 			isa = PBXGroup;
 			children = (
+				0A57359C262AB08C0075BACF /* ImageCache */,
 				0A03C9B625B5A9F80003BC65 /* DataStore */,
 				0A40D28F25B04DB1003B6E78 /* Cell */,
 				0A40D26E25B03440003B6E78 /* Controllers */,
@@ -334,6 +345,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A40D27025B03472003B6E78 /* Book.swift in Sources */,
+				0A57359E262AB0D80075BACF /* ImageCache.swift in Sources */,
 				0AF9EF2A25B019C200AFBCA0 /* AppDelegate.swift in Sources */,
 				0A40D27825B03ED7003B6E78 /* Webservice.swift in Sources */,
 				0A40D29125B04DC1003B6E78 /* BookCell.swift in Sources */,
